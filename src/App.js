@@ -9,7 +9,7 @@ import {hot} from 'react-hot-loader';
 // redux imports
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as loginActions from './actions/loginActions';
+import * as actions from './actions/actions';
 
 export class App extends Component {
 
@@ -18,7 +18,7 @@ export class App extends Component {
         // save token from url if provided or redirect to login page
         let token = this.getTokenFromUrl();
         if (token) { 
-            this.props.loginActions.receiveToken(token);
+            this.props.actions.saveToken(token);
         }
         else {
             this.login();
@@ -58,9 +58,7 @@ export class App extends Component {
         return (
             <BrowserRouter>
                 <div className="App">
-                    <header>
-                        <Header />
-                    </header>
+                    <Header />
                     <main>
                     <Switch>
                         <Route exact path='/' component={Home} />
@@ -76,13 +74,14 @@ export class App extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login
+        login: state.login,
+        user: state.user
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        loginActions: bindActionCreators(loginActions, dispatch)
+        actions: bindActionCreators(actions, dispatch)
     };
 }
 

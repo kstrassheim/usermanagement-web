@@ -1,3 +1,4 @@
 export default {
-    login: {token:0}
+    login: {token:0},
+    user:{}
 };

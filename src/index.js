@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import './style.scss';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
@@ -8,14 +9,4 @@ import {Provider} from 'react-redux';
 import configureStore from './store/configureStore';
 const store = configureStore();
 
-export class InitApp extends Component {
-    render() {
-        return (
-            <Provider store={store}>
-                <App />
-            </Provider>
-        );
-    }
-}
-
-ReactDOM.render(<InitApp />, document.getElementById('app'));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('app'));

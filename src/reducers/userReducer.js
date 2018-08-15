@@ -1,11 +1,11 @@
 import initialState from './initialState';
-import {SAVE_TOKEN} from '../actions/actionTypes';
+import {GET_USER} from '../actions/actionTypes';
 
-export default function login (state = initialState.login, action) {
+export default function login (state = initialState.user, action) {
   let newState;
   switch (action.type) {
-    case SAVE_TOKEN:
-      newState = action.login;
+    case GET_USER:
+      newState = action.user;
       console.log(`${action.type} Action`)
       return newState;
     default:
