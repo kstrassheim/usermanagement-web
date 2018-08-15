@@ -1,0 +1,1 @@
+export const RECEIVE_TOKEN = 'RECEIVE_TOKEN';
