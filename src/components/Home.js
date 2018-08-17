@@ -10,7 +10,7 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.props.actions.getUserImage(this.props.login.token);
+        this.props.actions.getUserImage();
     }
 
     render() {
@@ -25,7 +25,6 @@ class Home extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
         userImage: state.userImage
     };
 }

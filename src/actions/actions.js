@@ -8,10 +8,11 @@ export function saveToken(token) {
     return {type: types.SAVE_TOKEN, login: {token: token}};
 }
 
-export function getUser(token) {
-    return async (dispatch) => {
+export function getUser() {
+    return async (dispatch, getState) => {
         try {
-            const params = {access_token:token};
+            const { login } = getState();
+            const params = {access_token:login.token};
             const searchParams = Object.keys(params).map((key) => {return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]); }).join('&');
             const result = await fetch(`${authServer}/auth/validate`, {
                 method: 'POST',
@@ -30,15 +31,16 @@ export function getUser(token) {
     }
 }
 
-export function getUserImage(token) {
-    return async (dispatch) => {
+export function getUserImage() {
+    return async (dispatch, getState) => {
         try {
+            const { login } = getState();
             const result = await fetch(`${userServer}/api/UserImage`, {
                 method: 'GET',
                 mode: 'cors',
                 cache: 'no-cache',
                 credentials:'include',
-                headers: {'authorization': token}
+                headers: {'authorization': login.token}
             });
             let data = await result.blob();
             let image = URL.createObjectURL(data);
@@ -50,9 +52,10 @@ export function getUserImage(token) {
     }
 }
 
-export function uploadUserImage(token, file) {
-    return async (dispatch) => {
+export function uploadUserImage(file) {
+    return async (dispatch, getState) => {
         try {
+            const { login } = getState();
             const formData = new FormData();
             formData.append('file',file)
             const result = await fetch(`${userServer}/api/UserImage`, {
@@ -60,14 +63,14 @@ export function uploadUserImage(token, file) {
                 mode: 'cors',
                 cache: 'no-cache',
                 credentials:'include',
-                headers: {'authorization': token },
+                headers: {'authorization': login.token },
                 body:formData
             });
             let data = await result.text();
             let status = result.statusText;
-            console.log(`Upload status ${status}`)
-            await getUserImage(token)(dispatch);
-            //dispatch({type: types.UPLOAD_USER_IMAGE, userImage: image}); 
+            console.log(`Upload status ${status}`);
+            dispatch({type: types.UPLOAD_USER_IMAGE}); 
+            getUserImage()(dispatch, getState);
         }
         catch(err) {
             console.error(err);

@@ -10,7 +10,7 @@ class Edit extends Component {
 
     constructor(props) {
         super(props);
-        this.props.actions.getUserImage(this.props.login.token);
+        this.props.actions.getUserImage();
         this.state ={
             file:null
         }
@@ -18,13 +18,12 @@ class Edit extends Component {
 
     onFormSubmit(e){
         e.preventDefault() // Stop form submit
-        this.props.actions.uploadUserImage(this.props.login.token, this.state.file);
+        this.props.actions.uploadUserImage(this.state.file);
     }
 
     onChange(e) {
         this.setState({file:e.target.files[0]})
     }
-
     render() {
         return (
             <div>
@@ -41,7 +40,6 @@ class Edit extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
         userImage: state.userImage
     };
 }

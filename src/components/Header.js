@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 class Header extends Component {
 
     componentWillMount() {
-        this.props.actions.getUser(this.props.login.token);
+        this.props.actions.getUser();
     }
 
     render() {
@@ -27,7 +27,6 @@ class Header extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
         user: state.user
     };
 }
