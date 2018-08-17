@@ -1,4 +1,5 @@
 export default {
     login: {token:0},
-    user:{}
+    user:{},
+    userImage:''
 };
