@@ -15,6 +15,8 @@ export class App extends Component {
 
     constructor(props) {
         super(props);
+        this.authformUrl = 'https://nodeauthform.azurewebsites.net';
+        //this.authformUrl = 'http://localhost:4200';
         // save token from url if provided or redirect to login page
         let token = this.getTokenFromUrl();
         if (token) { 
@@ -47,12 +49,11 @@ export class App extends Component {
         window.location = page;
     }
 
-    login () {
+    login() {
         let redirectUrl = encodeURIComponent(window.location.href + '?token={0}');
-        let loginUrl = `https://nodeauthform.azurewebsites.net?redirectUrl=${redirectUrl}`;
+        let loginUrl = `${this.authformUrl}?redirectUrl=${redirectUrl}`;
         this.redirectToPage(loginUrl);
     }
-
 
     render() {
         return (
