@@ -4,6 +4,7 @@ import {hot} from 'react-hot-loader';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/actions';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
 
@@ -16,6 +17,8 @@ class Header extends Component {
             <header>
                 <h1>Header</h1>
                 <p>Username: {this.props.user.name}</p>
+                <Link to="/">Home</Link>
+                <Link to="/edit">Edit</Link>
             </header>
         );
     }

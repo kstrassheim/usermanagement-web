@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import Home from './components/Home';
+import Edit from './components/Edit';
 import About from './components/About';
 import NotFound from './components/NotFound';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -63,6 +64,7 @@ export class App extends Component {
                     <main>
                     <Switch>
                         <Route exact path='/' component={Home} />
+                        <Route exact path='/edit' component={Edit} />
                         <Route exact path='/about' component={About} />
                         <Route path="*" component={NotFound} />
                     </Switch>
